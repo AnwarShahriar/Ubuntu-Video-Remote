@@ -4,12 +4,9 @@ const robot = require('robot');
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/play', (req, res) => {
+app.get('/toggle', (req, res) => {
     robot.keyTap('space');
-});
-
-app.get('/pause', (req, res) => {
-    robot.keyTap('space');
+    res.send("Ok");
 });
 
 app.listen(PORT, () => {
