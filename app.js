@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const robot = require('robot');
+const robot = require('robotjs');
 
 const PORT = process.env.PORT || 3000;
 
