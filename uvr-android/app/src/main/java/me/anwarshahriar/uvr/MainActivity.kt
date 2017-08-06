@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     toggleVideoButton.setOnClickListener {
       val IP = ipAddressField.text
-      AndroidNetworking.get("http://${IP}:3000/play")
+      AndroidNetworking.get("http://${IP}:3000/toggle")
           .build()
           .getAsString(null);
     }
