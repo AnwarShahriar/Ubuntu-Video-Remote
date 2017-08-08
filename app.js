@@ -12,7 +12,11 @@ app.get('/toggle', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`);
-    const IP = networkUtils.ip() || "No valid IP found";
-    console.log('Please put the IP to Anroid client given below: ');
-    console.log(`IP: ${IP}`);
+    try {
+        const IP = networkUtils.ip() || "No valid IP found";
+        console.log('Please put the IP to Anroid client given below: ');
+        console.log(`IP: ${IP}`);
+    } catch (err) {
+        console.log(err);
+    }
 });
