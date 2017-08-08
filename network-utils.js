@@ -6,9 +6,11 @@ const getIP = () => {
         return key.startsWith('wl');
     });
 
-    return ifaces[ifaceKey].find((iface) => {
+    const interface = ifaces[ifaceKey].find((iface) => {
         return iface.family === 'IPv4';
-    }).address;
+    });
+
+    return interface.address;
 }
 
 module.exports = {
