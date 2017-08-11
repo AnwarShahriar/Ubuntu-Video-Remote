@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
   val IP_ADDR_KEY = "KEY_IP_ADDR"
 
   val toggleVideoButton: Button by lazy { findViewById<Button>(R.id.toggle_video_button) }
+  val nextVideoButton: Button by lazy { findViewById<Button>(R.id.forward_video_button) }
   val ipAddressField: EditText by lazy { findViewById<EditText>(R.id.ip_address_field) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,13 @@ class MainActivity : AppCompatActivity() {
     toggleVideoButton.setOnClickListener {
       val IP = ipAddressField.text
       AndroidNetworking.get("http://${IP}:3000/toggle")
+          .build()
+          .getAsString(null);
+    }
+
+    nextVideoButton.setOnClickListener {
+      val IP = ipAddressField.text
+      AndroidNetworking.get("http://${IP}:3000/forward")
           .build()
           .getAsString(null);
     }

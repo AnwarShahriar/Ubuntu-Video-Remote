@@ -10,6 +10,12 @@ app.get('/toggle', (req, res) => {
     res.send("Ok");
 });
 
+app.get('/forward', (req, res) => {
+    robot.keyTap('control');
+    robot.keyTap('right');
+    res.send("Ok");
+});
+
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`);
     try {
