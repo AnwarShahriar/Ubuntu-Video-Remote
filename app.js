@@ -1,4 +1,5 @@
 const express = require('express');
+const exec = require('child_process').exec;
 const app = express();
 const robot = require('robotjs');
 const networkUtils = require('./network-utils');
@@ -15,6 +16,17 @@ app.get('/forward', (req, res) => {
     robot.keyTap('right');
     res.send("Ok");
 });
+
+app.get('/shutdown', (req, res) => {
+    shutdown(() => {
+        console.log('Executing');
+    });
+    res.send("Ok");
+});
+
+function shutdown(callback){
+    exec('shutdown now', function(error, stdout, stderr){ callback(stdout); });
+}
 
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`);

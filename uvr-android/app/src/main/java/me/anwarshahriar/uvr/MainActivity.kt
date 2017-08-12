@@ -1,5 +1,7 @@
 package me.anwarshahriar.uvr
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -12,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
   val toggleVideoButton: Button by lazy { findViewById<Button>(R.id.toggle_video_button) }
   val nextVideoButton: Button by lazy { findViewById<Button>(R.id.forward_video_button) }
+  val shutdownButton: Button by lazy { findViewById<Button>(R.id.shutdown_button) }
   val ipAddressField: EditText by lazy { findViewById<EditText>(R.id.ip_address_field) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +33,23 @@ class MainActivity : AppCompatActivity() {
       AndroidNetworking.get("http://${IP}:3000/forward")
           .build()
           .getAsString(null);
+    }
+
+    shutdownButton.setOnClickListener {
+      AlertDialog.Builder(this)
+          .setTitle("Are you sure?")
+          .setPositiveButton("Shutdown", { dialogInterface, i ->
+            val IP = ipAddressField.text
+            AndroidNetworking.get("http://${IP}:3000/shutdown")
+                .build()
+                .getAsString(null);
+          })
+          .setNegativeButton("Cancel", { dialogInterface, i ->
+            // Nothing to do here
+          })
+          .create()
+          .show()
+
     }
 
     ipAddressField.setText(getSavedIP())
